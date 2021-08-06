@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>IIITL</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Herr+Von+Muellerhoff" rel="stylesheet">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/open-iconic-bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/animate.css')}}">
+    
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/owl.carousel.min.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/owl.theme.default.min.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/magnific-popup.css')}}">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/aos.css')}}">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/ionicons.min.css')}}">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap-datepicker.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/jquery.timepicker.css')}}">
+
+    
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/flaticon.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/icomoon.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css')}}">
+	
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em" crossorigin="anonymous"></script>
+  <script defer src="https://use.fontawesome.com/releases/v5.1.1/js/all.js" integrity="sha384-BtvRZcyfv4r0x/phJt9Y9HhnN5ur1Z+kZbKVgzVBAlQZX4jvAuImlIz+bG7TS00a" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css" integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+  <link href="https://fonts.googleapis.com/css?family=Quattrocento+Sans|Source+Sans+Pro:300" rel="stylesheet">
+  <script src="{{ url_for('static', filename='js/index.js') }}"></script>
+  <script>
+
+
+
+
+
+ function myFunction()
+  {
+    selected_course = '{{courses[0]}}';
+    link = '{{link}}';
+   course_value=selected_course;
+document.getElementById("selected").innerHTML=selected_course;
+console.log("gg");
+console.log(link);
+console.log(selected_course);
+       selected_course = course_value;
+       document.getElementById("selected").innerHTML=selected_course;
+
+       $.getJSON("/getlink", {"selected_course": selected_course},function(data,status,xhr)
+
+       {
+         console.log("tt")
+         console.log(data.link);
+         link=data.link;
+         
+        //  link = "https://docs.google.com/spreadsheets/d/1xlgbxidPaQ20MmZ9rElBlGG2whKbBQa9G8-J5DzCvIo/edit?usp=sharing";
+         document.getElementById("google_sheet").src=link;
+
+       }
+       );
+
+ //      $('#start').click(function(){
+
+
+//console.log("fff");
+
+//console.log(selected_course + " start")
+//$.post( "/start_attendance",{"x":"start","selected_course": selected_course}, function( data ) {
+  //console.log(data);
+
+
+//});
+//}
+//);
+
+
+
+
+
+
+}
+
+    
+  function myFunction1(){
+
+
+console.log("fff");
+
+console.log(selected_course + " start")
+$.post( "/start_attendance",{"x":"start","selected_course": selected_course}, function( data ) {
+  console.log(data);
+});
+} 
+
+
+  $('#settings_job_vac').modal('handleUpdate');
+ 
+ 
+  </script>
+  </head>
+<body onload="myFunction()">
+<div id="colorlib-page">
+		<a href="#" class="js-colorlib-nav-toggle colorlib-nav-toggle"><i></i></a>
+		<aside id="colorlib-aside" role="complementary" class="js-fullheight text-center">
+			<h1 id="colorlib-logo"><span class="img" style="background-image: url({{ url_for('static', filename='images/ds2.png')}});"></span>{{x}} Login</h1>
+			<nav id="colorlib-main-menu" role="navigation">
+				<ul>
+					<li><a href="#">Course : <span>{{subject}}</span></a></li>
+					<li class="colorlib-active"><a href="#">View Attendance</a></li>		
+			<form method="GET" action="{{url_for('loadlink1')}}"><select name= "course">
+					<option value="{{courses[0]}}" selected>{{courses[0]}}</option>
+    {% for Course in courses[1:] %}
+    <option value= "{{Course}}">{{Course}}</option>"
+    {% endfor %}
+</select>
+<p><button type="submit" class="btn btn-default">Go</button></p>
+</form>
+			<li><div class="colorlib-footer"><a href="{{url_for('logout')}}">LogOut</a></div></li>
+			</ul>
+			</nav>
+		</aside> <!-- END COLORLIB-ASIDE -->
+		<div id="colorlib-main">
+		<div class="boxed">
+    <section class="ftco-section-no-padding bg-light" >
+   <iframe id="google_sheet" src="{{iframe1}}" width="1100" height="700"></iframe>
+        <br>
+		</section>
+
+</div>
+		</div><!-- END COLORLIB-MAIN -->
+	</div><!-- END COLORLIB-PAGE -->
+	
+  <script src="{{ url_for('static', filename='js/jquery.min.js')}}"></script>
+  <script src="{{ url_for('static', filename='js/jquery-migrate-3.0.1.min.js')}}"></script>
+  <script src="{{ url_for('static', filename='js/popper.min.js')}}"></script>
+  <script src="{{ url_for('static', filename='js/bootstrap.min.js')}}"></script>
+  <script src="{{ url_for('static', filename='js/jquery.easing.1.3.js')}}"></script>
+  <script src="{{ url_for('static', filename='js/jquery.waypoints.min.js')}}"></script>
+  <script src="{{ url_for('static', filename='js/jquery.stellar.min.js')}}"></script>
+  <script src="{{ url_for('static', filename='js/owl.carousel.min.js')}}"></script>
+  <script src="{{ url_for('static', filename='js/jquery.magnific-popup.min.js')}}"></script>
+  <script src="{{ url_for('static', filename='js/aos.js')}}"></script>
+  <script src="{{ url_for('static', filename='js/jquery.animateNumber.min.js')}}"></script>
+  <script src="{{ url_for('static', filename='js/bootstrap-datepicker.js')}}"></script>
+  <script src="{{ url_for('static', filename='js/jquery.timepicker.min.js')}}"></script>
+  <script src="{{ url_for('static', filename='js/scrollax.min.js')}}"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
+  <script src="{{ url_for('static', filename='js/google-map.js')}}"></script>
+  <script src="{{ url_for('static', filename='js/main.js')}}"></script>
+    
+  </body>
+</html>
